@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -12,772 +12,16 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=DM+Serif+Display&display=swap"
     rel="stylesheet">
 
-  <style>
-    /* RESET */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #050505;
-      color: #f5f5f5;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* BG CINÉ */
-    .bg-cinema {
-      position: fixed;
-      inset: -120px;
-      background:
-        radial-gradient(circle at 0% 0%, #272727, transparent 55%),
-        radial-gradient(circle at 100% 100%, #111111, #050505 65%);
-      filter: blur(4px);
-      opacity: .95;
-      z-index: -2;
-      transform: translateY(0);
-      transition: transform .3s ease-out;
-    }
-
-    .bg-noise {
-      position: fixed;
-      inset: -40px;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: .12;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .feis-app {
-      min-height: 100vh;
-    }
-
-    .shell {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px 20px 80px;
-    }
-
-    /* HEADER */
-    .top {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(5,5,5,0.95),
-        rgba(5,5,5,0.70),
-        transparent
-      );
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .top-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 12px 20px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 25% 20%, #ffffff, #d9d9d9 45%, #888888 80%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: .06em;
-      color: #050505;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .brand-name {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .brand-tag {
-      font-size: 11px;
-      opacity: .65;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .nav-link {
-      border-radius: 999px;
-      border: none;
-      padding: 6px 12px;
-      background: transparent;
-      color: #dcdcdc;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background .18s ease, color .18s ease, transform .12s ease;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.06);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .nav-link.is-active {
-      background: #f5f5f5;
-      color: #050505;
-      font-weight: 600;
-    }
-
-    /* SECTIONS GÉNÉRALES */
-
-    main {
-      margin-top: 40px;
-    }
-
-    section {
-      padding: 64px 0 44px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      opacity: .6;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .section-sub {
-      font-size: 14px;
-      opacity: .8;
-      max-width: 640px;
-      line-height: 1.6;
-    }
-
-    /* HERO CINÉMATIQUE */
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-      gap: 42px;
-      align-items: center;
-      margin-top: 26px;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      opacity: .65;
-      margin-bottom: 10px;
-    }
-
-    .hero-title-main {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      font-size: clamp(34px, 4.8vw, 46px);
-      font-weight: 700;
-      line-height: 1.04;
-      margin-bottom: 14px;
-    }
-
-    .hero-title-main span.accent {
-      background: linear-gradient(90deg, #ffffff, #bfbfbf);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-title-main span.sub {
-      font-size: .85em;
-      opacity: .85;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .pill {
-      font-size: 11px;
-      padding: 6px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(10,10,10,0.92);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      opacity: .9;
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .hero-text {
-      font-size: 14px;
-      opacity: .82;
-      max-width: 540px;
-      line-height: 1.6;
-    }
-
-    .hero-actions {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 10px 20px;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      transition: background .18s ease,
-                  transform .12s ease,
-                  box-shadow .18s ease,
-                  border-color .18s ease;
-    }
-
-    .btn-primary {
-      background: #f5f5f5;
-      color: #050505;
-      font-weight: 600;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.75);
-    }
-
-    .btn-primary:hover {
-      background: #e9e9e9;
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #f5f5f5;
-    }
-
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.06);
-      transform: translateY(-1px);
-    }
-
-    .btn-icon {
-      font-size: 1.1em;
-    }
-
-    /* SNAPSHOT + MARCHÉS */
-
-    .snapshot-panel {
-      background: radial-gradient(circle at top, #171717, #050505 70%);
-      border-radius: 26px;
-      padding: 20px 20px 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,0.85),
-        0 0 0 1px rgba(255,255,255,0.02);
-    }
-
-    .snapshot-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .snapshot-title {
-      font-size: 13px;
-      font-weight: 600;
-      opacity: .9;
-    }
-
-    .snapshot-sub {
-      font-size: 11px;
-      opacity: .7;
-    }
-
-    .snapshot-status {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-      font-size: 11px;
-    }
-
-    .snapshot-chip-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .chip {
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(34,197,94,0.18);
-      border: 1px solid rgba(34,197,94,0.55);
-      color: #bbf7d0;
-    }
-
-    .chip-ghost {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #e5e5e5;
-    }
-
-    .snapshot-body {
-      font-size: 12px;
-      opacity: .92;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .snapshot-footer {
-      font-size: 11px;
-      opacity: .7;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .markets-board {
-      margin-top: 14px;
-      background: #080808;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 14px 14px 10px;
-    }
-
-    .markets-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-size: 12px;
-    }
-
-    .markets-title {
-      opacity: .85;
-    }
-
-    .markets-refresh {
-      font-size: 11px;
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: transparent;
-      color: #e5e5e5;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .markets-refresh:hover {
-      background: rgba(255,255,255,0.06);
-    }
-
-    .markets-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 4px 10px;
-      font-size: 12px;
-    }
-
-    .market-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 4px;
-    }
-
-    .market-name {
-      opacity: .75;
-    }
-
-    .market-right {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-    }
-
-    .market-value {
-      font-variant-numeric: tabular-nums;
-      opacity: .9;
-    }
-
-    .market-change {
-      font-variant-numeric: tabular-nums;
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      min-width: 56px;
-      text-align: center;
-    }
-
-    .chg-pos {
-      background: rgba(22,163,74,0.24);
-      color: #4ade80;
-    }
-
-    .chg-neg {
-      background: rgba(220,38,38,0.24);
-      color: #fb7185;
-    }
-
-    .markets-note {
-      font-size: 10px;
-      opacity: .65;
-      margin-top: 6px;
-    }
-
-    /* QUESTIONS INTERACTIVES */
-
-    .questions-layout {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-      gap: 26px;
-      align-items: flex-start;
-    }
-
-    .q-intro-block {
-      background: rgba(10,10,10,0.96);
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 18px 18px 16px;
-      font-size: 13px;
-      opacity: .85;
-      line-height: 1.6;
-    }
-
-    .q-intro-block h3 {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .q-intro-tags {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      opacity: .78;
-    }
-
-    .q-intro-tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .q-accordion {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .q-item {
-      background: rgba(10,10,10,0.96);
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-      transition: border-color .18s ease, box-shadow .18s ease;
-    }
-
-    .q-item.is-open {
-      border-color: rgba(255,255,255,0.22);
-      box-shadow: 0 18px 32px rgba(0,0,0,0.85);
-    }
-
-    .q-btn {
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: none;
-      padding: 12px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .q-btn-question {
-      font-weight: 500;
-    }
-
-    .q-btn-meta {
-      font-size: 11px;
-      opacity: .6;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .q-btn-icon {
-      font-size: 14px;
-      transition: transform .18s ease;
-    }
-
-    .q-item.is-open .q-btn-icon {
-      transform: rotate(90deg);
-    }
-
-    .q-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .24s ease;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 0 14px;
-    }
-
-    .q-panel-inner {
-      padding: 12px 0 12px;
-      font-size: 13px;
-      opacity: .85;
-      line-height: 1.6;
-    }
-
-    .q-panel-inner strong {
-      font-weight: 600;
-    }
-
-    .q-badges {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      opacity: .8;
-    }
-
-    .q-badge {
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* MACRO – STYLE JOURNAL FINANCIER */
-
-    .macro-layout {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: 26px;
-    }
-
-    .macro-column {
-      background: rgba(9,9,9,0.97);
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 18px 18px 16px;
-    }
-
-    .macro-headline {
-      font-family: "DM Serif Display", "Times New Roman", serif;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .macro-kicker {
-      font-size: 11px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      opacity: .65;
-      margin-bottom: 6px;
-    }
-
-    .macro-text {
-      font-size: 13px;
-      line-height: 1.7;
-      opacity: .86;
-    }
-
-    .macro-list {
-      margin-top: 10px;
-      font-size: 13px;
-      opacity: .86;
-      line-height: 1.6;
-      list-style: none;
-    }
-
-    .macro-list li + li {
-      margin-top: 5px;
-    }
-
-    .macro-note {
-      margin-top: 10px;
-      font-size: 11px;
-      opacity: .7;
-    }
-
-    /* CLUB */
-
-    .club-layout {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: 26px;
-    }
-
-    .club-card {
-      background: rgba(10,10,10,0.96);
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 18px 18px 16px;
-      font-size: 13px;
-      line-height: 1.6;
-      opacity: .85;
-    }
-
-    .club-card h3 {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .club-pills {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      opacity: .8;
-    }
-
-    .club-pill {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .club-meta {
-      margin-top: 10px;
-      font-size: 11px;
-      opacity: .7;
-    }
-
-    .club-timeline {
-      margin-top: 10px;
-      font-size: 12px;
-      opacity: .84;
-      line-height: 1.6;
-      list-style: none;
-    }
-
-    .club-timeline li + li {
-      margin-top: 6px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 26px 20px 40px;
-      font-size: 11px;
-      opacity: .6;
-      text-align: center;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 960px) {
-      .hero-grid,
-      .questions-layout,
-      .macro-layout,
-      .club-layout,
-      .markets-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .top-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .shell {
-        padding-inline: 16px;
-      }
-
-      .hero-title-main {
-        font-size: 30px;
-      }
-
-      section {
-        padding-top: 52px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
-
 <body>
+  <!-- BACKGROUND CINÉ -->
   <div class="bg-cinema"></div>
   <div class="bg-noise"></div>
 
   <div class="feis-app">
+    <!-- HEADER -->
     <header class="top">
       <div class="top-inner">
         <div class="brand">
@@ -790,570 +34,269 @@
 
         <nav class="nav">
           <button class="nav-link is-active" data-scroll="#intro">Intro</button>
-          <button class="nav-link" data-scroll="#questions">Questions clés</button>
-          <button class="nav-link" data-scroll="#markets-section">Marchés</button>
-          <button class="nav-link" data-scroll="#macro">Macro & politique</button>
+          <button class="nav-link" data-scroll="#experience">Expérience</button>
+          <button class="nav-link" data-scroll="#markets">Marchés</button>
+          <button class="nav-link" data-scroll="#learning">Learning Hub</button>
           <button class="nav-link" data-scroll="#club">Le club</button>
         </nav>
       </div>
     </header>
 
     <main class="shell">
-      <!-- INTRO / HERO -->
-      <section id="intro">
-        <div class="hero-eyebrow">Club finance · FEIS</div>
+      <!-- SECTION 1 : HERO CINÉ -->
+      <section id="intro" class="section hero" data-animate>
         <div class="hero-grid">
-          <div>
-            <h1 class="hero-title-main">
-              <span class="accent">Lire les marchés comme un desk pro.</span><br />
-              <span class="sub">Pas comme un fil TikTok.</span>
+          <div class="hero-left">
+            <p class="hero-eyebrow">CLUB FINANCE • FEIS</p>
+            <h1 class="hero-title">
+              <span class="hero-main">Studio étudiant pour lire les marchés<span class="hero-gradient"> comme un desk pro.</span></span>
+              <span class="hero-sub">Pas comme un fil TikTok.</span>
             </h1>
 
             <div class="hero-badges">
-              <div class="pill"><span class="pill-dot"></span> ETF, indices, macro</div>
-              <div class="pill">Crypto = labo, pas casino</div>
-              <div class="pill">Ateliers marchés & carrière</div>
-              <div class="pill">Étudiants • FEIS</div>
+              <span class="pill"><span class="pill-dot"></span> ETF & indices mondiaux</span>
+              <span class="pill">Macro & politiques publiques</span>
+              <span class="pill">Crypto = labo, pas casino</span>
             </div>
 
             <p class="hero-text">
-              FEIS est un studio étudiant pour ceux qui veulent comprendre
-              <strong>comment un desk de marché pense</strong> : structure de portefeuille,
-              signaux macro, langage des indices. Pas de promesses magiques,
-              juste des réflexes solides pour le long terme.
+              FEIS, c’est un <strong>laboratoire de finance de marché</strong> :
+              on apprend à lire le CAC, le S&P, la Fed, les élections…
+              avec des réflexes d’asset manager, pas de parieur.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" data-scroll="#markets-section">
+              <button class="btn btn-primary" data-scroll="#markets">
                 Ouvrir le board marchés <span class="btn-icon">↗</span>
               </button>
-              <button class="btn btn-ghost" data-scroll="#questions">
-                Voir les questions que tout le monde se pose
+              <button class="btn btn-ghost" data-scroll="#experience">
+                Comprendre l’expérience FEIS
               </button>
             </div>
           </div>
 
-          <aside>
-            <div class="snapshot-panel">
-              <div class="snapshot-header">
-                <div>
-                  <div class="snapshot-title">Snapshot FEIS du jour</div>
-                  <div class="snapshot-sub">Vue pédagogique, inspirée de la presse type Financial Times.</div>
-                </div>
-                <div class="snapshot-status">
-                  <div class="snapshot-chip-row">
-                    <span class="chip">Focus : structure de portefeuille</span>
-                    <span class="chip-ghost">Pas un conseil d’investissement</span>
-                  </div>
-                </div>
+          <aside class="hero-right">
+            <div class="hero-card">
+              <div class="hero-card-header">
+                <span class="hero-card-title">Vue du jour FEIS</span>
+                <span class="hero-card-tag">Lecture pédagogique</span>
               </div>
+              <p class="hero-card-text" id="snapshot-text">
+                Indices proches de leurs plus hauts, banques centrales plus neutres,
+                inflation en décélération : FEIS rappelle que le socle reste
+                <strong>cash de sécurité + ETF Monde</strong>, avant toute prise de
+                risque sur titres individuels ou crypto.
+              </p>
+              <div class="hero-card-footer">
+                <span>Focus : discipline & long terme</span>
+                <span>Snapshot • v5</span>
+              </div>
+            </div>
 
-              <div class="snapshot-body" id="snapshot-text">
-                Indices actions proches de leurs plus hauts, banques centrales plus
-                neutres, inflation en décélération. FEIS rappelle que le combo
-                <strong>cash de sécurité + ETF monde</strong> reste le socle, avant tout
-                pari sur des titres individuels ou de la crypto.
-              </div>
+            <div class="hero-mini">
+              <p class="hero-mini-label">Ce que tu vas apprendre :</p>
+              <ul class="hero-mini-list">
+                <li>• Lire un board marchés sans paniquer.</li>
+                <li>• Connecter macro, politique & indices.</li>
+                <li>• Construire un portefeuille cohérent.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
 
-              <div class="snapshot-footer">
-                <span>Lecture : horizon long terme & discipline.</span>
-                <span>Update FEIS • v4</span>
-              </div>
+        <div class="scroll-cue">
+          <span>Scroll</span>
+          <span class="scroll-dot"></span>
+        </div>
+      </section>
 
-              <div class="markets-board" id="markets-section">
-                <div class="markets-header">
-                  <div class="markets-title">Vue marchés (indices & crypto)</div>
-                  <button class="markets-refresh" id="btn-refresh">
-                    Rafraîchir la vue
-                  </button>
-                </div>
-                <div class="markets-grid" id="markets-list">
-                  <!-- rempli par JS -->
-                </div>
-                <div class="markets-note" id="markets-note">
-                  Données récupérées en temps réel quand possible. Si l’API
-                  externe bloque, FEIS bascule sur un mode pédagogique simulé.
-                </div>
+      <!-- SECTION 2 : EXPÉRIENCE FEIS (cartes interactives) -->
+      <section id="experience" class="section" data-animate>
+        <p class="section-label">Expérience</p>
+        <h2 class="section-title">Un studio, trois terrains de jeu</h2>
+        <p class="section-sub">
+          Chaque séance FEIS mélange <strong>marchés en temps réel</strong>, 
+          <strong>analyse macro</strong> et <strong>atelier pratique</strong>. 
+          Clique sur une carte pour voir ce qui se passe concrètement.
+        </p>
+
+        <div class="experience-grid">
+          <article class="xp-card" data-xp="market-lab">
+            <h3>Market Lab</h3>
+            <p class="xp-tagline">Board indices & crypto projeté en live.</p>
+            <p class="xp-text">
+              On commence par 15 minutes de board : CAC, S&P, Nasdaq,
+              MSCI World, Bitcoin, taux longs. L’objectif : comprendre
+              ce qui a bougé, et pourquoi.
+            </p>
+            <ul class="xp-list">
+              <li>• Vue globale indices + FX + crypto.</li>
+              <li>• Lecture des variations, pas du bruit.</li>
+              <li>• Discussion : “si j’étais asset manager aujourd’hui…”</li>
+            </ul>
+          </article>
+
+          <article class="xp-card" data-xp="macro-room">
+            <h3>Macro Room</h3>
+            <p class="xp-tagline">La macro & la politique traduites en langage marchés.</p>
+            <p class="xp-text">
+              On part d’un événement (Fed, budget, élections) et on le
+              traduit en impact sur les taux, les devises, les indices.
+            </p>
+            <ul class="xp-list">
+              <li>• Décortiquer un article type Financial Times.</li>
+              <li>• Identifier les vrais drivers (croissance, inflation…).</li>
+              <li>• Relier ça à ton portefeuille théorique.</li>
+            </ul>
+          </article>
+
+          <article class="xp-card" data-xp="career-lab">
+            <h3>Career Lab</h3>
+            <p class="xp-tagline">Transformer FEIS en vraie ligne de CV.</p>
+            <p class="xp-text">
+              FEIS sert de terrain d’entraînement pour les entretiens :
+              mini-notes de marché, dossiers pays, revues d’ETF.
+            </p>
+            <ul class="xp-list">
+              <li>• Dossiers FEIS à montrer en entretien.</li>
+              <li>• Simulation de questions “marchés” recruteur.</li>
+              <li>• Construction d’un track record étudiant crédible.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="xp-detail" id="xp-detail">
+          <p class="xp-detail-placeholder">
+            Survole ou clique une carte pour voir comment se déroule une séance FEIS.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 3 : MARCHÉS (board interactif) -->
+      <section id="markets" class="section" data-animate>
+        <p class="section-label">Marchés</p>
+        <h2 class="section-title">Board marchés interactif</h2>
+        <p class="section-sub">
+          Inspiration Bloomberg / Financial Times : quelques indices clefs,
+          une colonne crypto, et une lecture pédagogique. Les données sont
+          récupérées en direct quand l’API l’autorise, sinon simulées.
+        </p>
+
+        <div class="markets-layout">
+          <div class="markets-card">
+            <div class="markets-header">
+              <div>
+                <p class="markets-title">Indices & crypto</p>
+                <p class="markets-sub">Vue synthétique — usage pédagogique uniquement.</p>
               </div>
+              <button class="btn-mini" id="btn-refresh">
+                Rafraîchir la vue
+              </button>
+            </div>
+
+            <div class="markets-grid" id="markets-list">
+              <!-- rempli par JS -->
+            </div>
+
+            <p class="markets-note" id="markets-note">
+              Chargement des données…
+            </p>
+          </div>
+
+          <aside class="markets-aside">
+            <div class="markets-comment" id="markets-comment">
+              <h3>Comment lire ce board ?</h3>
+              <p>
+                FEIS te pousse à voir les indices comme un tableau de bord :
+                <strong>où est le risque ? où est la croissance ?</strong> Les
+                pourcentages ne sont pas là pour faire peur, mais pour évaluer la
+                cohérence de ton allocation.
+              </p>
+              <p>
+                Clique sur un indice pour voir la lecture FEIS : rôle dans un
+                portefeuille, risque principal, horizon naturel.
+              </p>
             </div>
           </aside>
         </div>
       </section>
 
-      <!-- QUESTIONS CLÉS -->
-      <section id="questions">
-        <div class="section-label">Éducation FEIS</div>
-        <h2 class="section-title">Questions qu’un investisseur sérieux se pose vraiment</h2>
+      <!-- SECTION 4 : LEARNING HUB (questions interactives) -->
+      <section id="learning" class="section" data-animate>
+        <p class="section-label">Learning hub</p>
+        <h2 class="section-title">Questions qu’un investisseur sérieux se pose</h2>
         <p class="section-sub">
-          On ne répond pas avec des slogans, mais avec une logique de portefeuille :
-          rôle du cash, des ETF, de la crypto, du risque. Chaque question est
-          cliquable, avec une réponse structurée façon atelier FEIS.
+          Chaque question ouvre une mini “fiche FEIS” : situation, logique,
+          pièges, réflexe à retenir. L’idée : remplacer les threads random par
+          des réponses structurées.
         </p>
 
-        <div class="questions-layout">
-          <div class="q-intro-block">
-            <h3>Comment on répond chez FEIS ?</h3>
-            <p>
-              On part d’une question simple, puis on déplie :
-              <strong>1) Situation réelle</strong>, <strong>2) Options possibles</strong>,
-              <strong>3) Logique FEIS</strong>, <strong>4) Pièges à éviter</strong>.
-              L’objectif est que chaque membre reparte avec un réflexe d’asset manager,
-              pas juste une “astuce”.
-            </p>
-            <div class="q-intro-tags">
-              <span class="q-intro-tag">Portefeuille complet</span>
-              <span class="q-intro-tag">Risque compréhensible</span>
-              <span class="q-intro-tag">Horizon long terme</span>
-              <span class="q-intro-tag">Psychologie & discipline</span>
+        <div class="qa-layout">
+          <div class="qa-list" id="qa-list">
+            <!-- rempli par JS -->
+          </div>
+
+          <aside class="qa-aside">
+            <div class="qa-aside-card">
+              <h3>Comment utiliser ce hub ?</h3>
+              <p>
+                Tu peux t’en servir comme base de travail pour un doc perso
+                (Google Doc / Notion) : tu recopies les réponses, tu les adaptes
+                à ta situation, et tu construis ton propre manuel d’investisseur.
+              </p>
+              <p class="qa-aside-note">
+                Objectif : que tu sois capable d’expliquer ton portefeuille en
+                3 minutes à quelqu’un de très exigeant.
+              </p>
             </div>
-          </div>
-
-          <div class="q-accordion" id="q-accordion">
-            <!-- 1 -->
-            <article class="q-item">
-              <button class="q-btn">
-                <span class="q-btn-question">
-                  J’ai du cash sur livret, par où je commence pour investir ?
-                </span>
-                <span class="q-btn-meta">
-                  <span>Profil débutant</span>
-                  <span class="q-btn-icon">›</span>
-                </span>
-              </button>
-              <div class="q-panel">
-                <div class="q-panel-inner">
-                  <p>
-                    <strong>1. Situation :</strong> tu as un livret rempli, zéro
-                    expérience d’investissement. Réflexe classique : “tout mettre
-                    d’un coup” ou “attendre le bon moment”.
-                  </p>
-                  <p>
-                    <strong>2. Logique FEIS :</strong> on commence par séparer
-                    <strong>cash de sécurité</strong> (6 mois de dépenses) et
-                    <strong>capital à investir</strong>. Ce capital part ensuite
-                    progressivement sur un <strong>ETF Monde</strong> via
-                    versements réguliers (mensuels).
-                  </p>
-                  <p>
-                    <strong>3. Pourquoi :</strong> tu réduis le risque de tomber
-                    au pire moment, et tu te connectes à la croissance globale
-                    des entreprises plutôt qu’au seul taux du livret.
-                  </p>
-                  <div class="q-badges">
-                    <span class="q-badge">Cash de secours</span>
-                    <span class="q-badge">ETF Monde</span>
-                    <span class="q-badge">Investissement progressif</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- 2 -->
-            <article class="q-item">
-              <button class="q-btn">
-                <span class="q-btn-question">
-                  Quelle place donner à la crypto sans ruiner mon portefeuille ?
-                </span>
-                <span class="q-btn-meta">
-                  <span>Volatilité assumée</span>
-                  <span class="q-btn-icon">›</span>
-                </span>
-              </button>
-              <div class="q-panel">
-                <div class="q-panel-inner">
-                  <p>
-                    <strong>1. Position FEIS :</strong> crypto = laboratoire de
-                    volatilité, pas “retraite anticipée”.
-                  </p>
-                  <p>
-                    <strong>2. Règle de base :</strong> <strong>5 % max</strong> du
-                    patrimoine financier total, uniquement si tu acceptes
-                    mentalement de voir des -70 % sans exploser ton quotidien.
-                  </p>
-                  <p>
-                    <strong>3. Concrètement :</strong> socle ETF + cash d’abord.
-                    Puis, sur une petite poche, Bitcoin / Ethereum à long terme,
-                    pas 20 altcoins exotiques.
-                  </p>
-                  <div class="q-badges">
-                    <span class="q-badge">Poche spéculative limitée</span>
-                    <span class="q-badge">BTC / ETH d’abord</span>
-                    <span class="q-badge">Pas d’effet de levier</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- 3 -->
-            <article class="q-item">
-              <button class="q-btn">
-                <span class="q-btn-question">
-                  Est-ce que je dois attendre que “le marché baisse” pour entrer ?
-                </span>
-                <span class="q-btn-meta">
-                  <span>Biais psychologiques</span>
-                  <span class="q-btn-icon">›</span>
-                </span>
-              </button>
-              <div class="q-panel">
-                <div class="q-panel-inner">
-                  <p>
-                    <strong>Ce que montrent les données :</strong> rater quelques
-                    rares journées de forte hausse détruit une grande partie de la
-                    performance long terme.
-                  </p>
-                  <p>
-                    <strong>Approche FEIS :</strong> plutôt qu’attendre le moment
-                    parfait, on met en place un <strong>plan automatique</strong>
-                    (DCA) : même montant, même jour chaque mois, sur ETF diversifié.
-                  </p>
-                  <p>
-                    L’énergie mentale est utilisée pour suivre
-                    <strong>l’évolution de ton allocation</strong>, pas pour deviner
-                    le prochain creux.
-                  </p>
-                  <div class="q-badges">
-                    <span class="q-badge">DCA</span>
-                    <span class="q-badge">Données historiques</span>
-                    <span class="q-badge">Moins de stress</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- 4 -->
-            <article class="q-item">
-              <button class="q-btn">
-                <span class="q-btn-question">
-                  Comment utiliser FEIS pour ma carrière en finance de marché ?
-                </span>
-                <span class="q-btn-meta">
-                  <span>Angle carrière</span>
-                  <span class="q-btn-icon">›</span>
-                </span>
-              </button>
-              <div class="q-panel">
-                <div class="q-panel-inner">
-                  <p>
-                    FEIS peut devenir ton <strong>laboratoire de track record</strong> :
-                    mini-notes macro, suivis d’indices, revues de portefeuille
-                    simulé. Tout est ensuite compilé dans un doc ou un Notion pour
-                    alimenter CV et entretien.
-                  </p>
-                  <p>
-                    Objectif : être capable de parler comme un jeune analyste de
-                    marché, même en L1/L2, avec des exemples concrets de ce que tu
-                    as déjà fait dans le club.
-                  </p>
-                  <div class="q-badges">
-                    <span class="q-badge">Notes marchés</span>
-                    <span class="q-badge">Dossiers FEIS</span>
-                    <span class="q-badge">Préparation entretiens</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
+          </aside>
         </div>
       </section>
 
-      <!-- MACRO & POLITIQUE -->
-      <section id="macro">
-        <div class="section-label">Macro & politiques publiques</div>
-        <h2 class="section-title">Lire un cycle économique comme un journal financier, pas comme un thread</h2>
+      <!-- SECTION 5 : LE CLUB -->
+      <section id="club" class="section" data-animate>
+        <p class="section-label">Le club</p>
+        <h2 class="section-title">FEIS, un studio plus qu’un simple club finance</h2>
         <p class="section-sub">
-          On s’inspire de la structure de titres de la presse sérieuse (Financial Times,
-          The Economist…) : un angle clair, quelques chiffres, un impact sur les
-          marchés. FEIS traduit ça dans un langage compréhensible pour les étudiants.
-        </p>
-
-        <div class="macro-layout">
-          <article class="macro-column">
-            <div class="macro-kicker">Banques centrales</div>
-            <h3 class="macro-headline">Quand la Fed respire, les marchés re-pricent tout</h3>
-            <p class="macro-text">
-              Les banques centrales sont le métronome du coût de l’argent.
-              FEIS propose une grille simple : inflation, emploi, ton des
-              conférences de presse. On regarde comment chaque élément se
-              reflète sur les courbes de taux et les indices actions.
-            </p>
-            <ul class="macro-list">
-              <li>• Comprendre pourquoi une “pause” de taux peut déjà être un signal.</li>
-              <li>• Relier les mots des banquiers centraux aux mouvements du S&P 500.</li>
-              <li>• Distinguer bruit de marché et changement de régime.</li>
-            </ul>
-            <p class="macro-note">
-              Objectif : être capable d’expliquer en 2 minutes ce qui se passe
-              sur les taux et les indices après une réunion BCE / Fed.
-            </p>
-          </article>
-
-          <article class="macro-column">
-            <div class="macro-kicker">Politiques publiques & risque pays</div>
-            <h3 class="macro-headline">Budgets, élections, dette : ce que regardent les investisseurs</h3>
-            <p class="macro-text">
-              Au lieu de débattre “pour ou contre” telle réforme, FEIS se pose
-              une question : comment les flux de capitaux réagissent ? On regarde
-              dette, déficit, crédibilité des institutions, stabilité juridique.
-            </p>
-            <ul class="macro-list">
-              <li>• Pourquoi un ETF Monde est parfois plus sain qu’un “tout sur mon pays”.</li>
-              <li>• Comment une crise politique peut se voir avant tout sur la devise.</li>
-              <li>• Comment la presse internationale traite un événement local.</li>
-            </ul>
-            <p class="macro-note">
-              Le but n’est pas de moraliser, mais de comprendre
-              <strong>comment pensent les gros investisseurs</strong>.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- CLUB -->
-      <section id="club">
-        <div class="section-label">Le club</div>
-        <h2 class="section-title">FEIS, un studio étudiant plutôt qu’un simple “club finance”</h2>
-        <p class="section-sub">
-          FEIS fonctionne comme un petit studio : séances marchés, ateliers
-          méthodo, projets à mettre sur CV. L’idée : croiser culture générale
-          économique et vraie pratique de la finance de marché.
+          Pas de promesse de richesse rapide, pas de lien caché vers un broker.
+          FEIS, c’est un endroit où tu peux tester, débattre, te tromper, et
+          progresser avec d’autres profils ambitieux.
         </p>
 
         <div class="club-layout">
           <article class="club-card">
-            <h3>Ce qu’on fait concrètement</h3>
-            <p>
-              Chaque semaine, une séance peut combiner revue des indices, point
-              macro / politique publique, et atelier très concret : construire un
-              portefeuille ETF, simuler un choc de marché, décortiquer un article
-              de presse économique.
-            </p>
+            <h3>Format type d’une séance</h3>
             <ul class="club-timeline">
-              <li>• 15 min — Tour d’horizon : CAC, S&P, Nasdaq, MSCI World, Bitcoin.</li>
-              <li>• 20 min — Sujet macro / politique (élections, dette, banques centrales).</li>
-              <li>• 25 min — Atelier pratique (ETF vs stock picking, gestion du risque, etc.).</li>
+              <li><strong>00–15 min :</strong> board marchés & crypto, lecture commune.</li>
+              <li><strong>15–35 min :</strong> sujet macro / politique (Fed, budget, élections).</li>
+              <li><strong>35–60 min :</strong> atelier pratique : portefeuille ETF, risque, cas réel.</li>
             </ul>
-            <div class="club-pills">
-              <span class="club-pill">Sessions marchés</span>
-              <span class="club-pill">Workshops Excel / data</span>
-              <span class="club-pill">Notes macro FEIS</span>
-              <span class="club-pill">Prépa carrière</span>
-            </div>
             <p class="club-meta">
-              Tout peut être consigné dans un Google Doc ou un Notion partagé,
-              exploitable ensuite pour des candidatures et entretiens.
+              Tout peut être consigné dans un doc partagé pour créer, petit à petit,
+              ton dossier FEIS perso.
             </p>
           </article>
 
           <article class="club-card">
             <h3>Ce que FEIS n’est pas</h3>
             <p>
-              Pas de vente de formation miracle, pas d’affiliation à un broker,
-              pas de promesse de liberté financière en 6 mois. FEIS préfère la
-              transparence : on apprend, on confronte ses idées, on progresse.
+              Pas de “signals”, pas de promesse de x10. On préfère être honnête :
+              on t’aide à construire une <strong>culture financière solide</strong>
+              et des réflexes de risk management.
             </p>
-            <p>
-              La règle d’or : <strong>aucune décision réelle d’investissement ne se
-              prend sur la base d’une seule séance</strong>. On renvoie toujours vers
-              la notion de plan global, adapté à la situation de chacun.
-            </p>
-            <div class="club-pills">
-              <span class="club-pill">Indépendant de toute banque</span>
-              <span class="club-pill">Pas de promesses</span>
-              <span class="club-pill">Culture & méthode d’abord</span>
-            </div>
             <p class="club-meta">
-              FEIS est un laboratoire. À toi ensuite de construire ton propre
-              chemin, tes propres décisions, avec plus de recul.
+              Au final, c’est toi qui décideras quoi faire avec ton argent.
+              FEIS te donne juste une grille de lecture plus exigeante.
             </p>
           </article>
         </div>
       </section>
     </main>
 
-    <footer>
-      FEIS • Finance & Economic Insight Society — Prototype pédagogique. Rien ici
-      ne constitue un conseil en investissement personnalisé.
+    <footer class="footer">
+      FEIS • Finance & Economic Insight Society — Prototype étudiant. Aucune
+      information ici ne constitue un conseil en investissement personnalisé.
     </footer>
   </div>
-
-  <script>
-    // Parallax background
-    const bgCinema = document.querySelector(".bg-cinema");
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY * 0.12;
-      bgCinema.style.transform = `translateY(${y}px)`;
-    });
-
-    // Smooth scroll + active nav
-    const navLinks = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll("main section[id]");
-
-    navLinks.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = document.querySelector(btn.dataset.scroll);
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    });
-
-    function updateActiveNav() {
-      let activeId = null;
-      const offset = 160;
-      const scrollY = window.scrollY;
-      sections.forEach((sec) => {
-        const top = sec.offsetTop - offset;
-        if (scrollY >= top) {
-          activeId = `#${sec.id}`;
-        }
-      });
-      navLinks.forEach((btn) => {
-        if (btn.dataset.scroll === activeId) {
-          btn.classList.add("is-active");
-        } else {
-          btn.classList.remove("is-active");
-        }
-      });
-    }
-    window.addEventListener("scroll", updateActiveNav);
-    updateActiveNav();
-
-    // Questions accordéon
-    const qItems = document.querySelectorAll(".q-item");
-
-    qItems.forEach((item) => {
-      const btn = item.querySelector(".q-btn");
-      const panel = item.querySelector(".q-panel");
-      btn.addEventListener("click", () => {
-        const isOpen = item.classList.contains("is-open");
-        qItems.forEach((other) => {
-          other.classList.remove("is-open");
-          const p = other.querySelector(".q-panel");
-          if (p) p.style.maxHeight = null;
-        });
-        if (!isOpen) {
-          item.classList.add("is-open");
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      });
-    });
-
-    // MARCHÉS — tentative de vrai live via Yahoo Finance
-    const marketsList = document.getElementById("markets-list");
-    const marketsNote = document.getElementById("markets-note");
-    const refreshBtn = document.getElementById("btn-refresh");
-
-    const marketConfig = [
-      { label: "CAC 40", symbol: "^FCHI" },
-      { label: "S&P 500", symbol: "^GSPC" },
-      { label: "NASDAQ 100", symbol: "^NDX" },
-      { label: "MSCI World (ETF URTH)", symbol: "URTH" },
-      { label: "Bitcoin", symbol: "BTC-USD" },
-      { label: "Ethereum", symbol: "ETH-USD" }
-    ];
-
-    function renderMarkets(quotes, fromLive) {
-      marketsList.innerHTML = "";
-      quotes.forEach((q) => {
-        const row = document.createElement("div");
-        row.className = "market-row";
-
-        const left = document.createElement("span");
-        left.className = "market-name";
-        left.textContent = q.name;
-
-        const right = document.createElement("div");
-        right.className = "market-right";
-
-        const value = document.createElement("span");
-        value.className = "market-value";
-        value.textContent = q.price;
-
-        const change = document.createElement("span");
-        change.className =
-          "market-change " + (q.change >= 0 ? "chg-pos" : "chg-neg");
-        const sign = q.change >= 0 ? "+" : "";
-        change.textContent = `${sign}${q.change.toFixed(2)} %`;
-
-        right.appendChild(value);
-        right.appendChild(change);
-        row.appendChild(left);
-        row.appendChild(right);
-        marketsList.appendChild(row);
-      });
-
-      marketsNote.textContent = fromLive
-        ? "Vue marchés basée sur des données Yahoo Finance (sans garantie, usage pédagogique)."
-        : "Mode pédagogique : variations simulées sur la base des niveaux indicatifs.";
-    }
-
-    function simulateQuotes() {
-      const base = {
-        "^FCHI": 7400,
-        "^GSPC": 5100,
-        "^NDX": 18000,
-        "URTH": 120,
-        "BTC-USD": 65000,
-        "ETH-USD": 3500
-      };
-      const quotes = marketConfig.map((m) => {
-        const b = base[m.symbol] || 100;
-        const shift = (Math.random() * 1.2 - 0.6); // -0.6% à +1.2%
-        const price = (b * (1 + shift / 100)).toFixed(2);
-        return {
-          name: m.label,
-          price,
-          change: shift
-        };
-      });
-      renderMarkets(quotes, false);
-    }
-
-    async function fetchLiveQuotes() {
-      try {
-        const symbols = marketConfig.map((m) => m.symbol).join(",");
-        const url =
-          "https://query1.finance.yahoo.com/v7/finance/quote?symbols=" +
-          encodeURIComponent(symbols);
-
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-        const result = data.quoteResponse && data.quoteResponse.result
-          ? data.quoteResponse.result
-          : [];
-
-        if (!result.length) throw new Error("No data");
-
-        const quotes = marketConfig.map((m) => {
-          const match = result.find((r) => r.symbol === m.symbol) || {};
-          const price = match.regularMarketPrice ?? match.previousClose ?? 0;
-          const changePct =
-            match.regularMarketChangePercent ??
-            (match.regularMarketChange && match.regularMarketPreviousClose
-              ? (match.regularMarketChange / match.regularMarketPreviousClose) * 100
-              : 0);
-          return {
-            name: m.label,
-            price: price ? price.toFixed(2) : "--",
-            change: changePct || 0
-          };
-        });
-
-        renderMarkets(quotes, true);
-      } catch (err) {
-        console.warn("Live markets failed, switching to simulation:", err);
-        simulateQuotes();
-      }
-    }
-
-    refreshBtn.addEventListener("click", () => {
-      fetchLiveQuotes();
-    });
-
-    // première vue au chargement
-    fetchLiveQuotes();
-  </script>
 </body>
 </html>
